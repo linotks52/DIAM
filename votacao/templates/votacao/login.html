@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Autenticação</title>
+</head>
+<body>
+    <h1> Autenticação</h1>
+        <form action="{% url 'votacao:logar' %}"  method="post">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username">
+        <input type="password" name="password" placeholder="Senha">
+        <input type="submit" value="logar" />
+        </form>
+    <h2> Não tem uma conta? Crie uma <a href="{% url 'votacao:signup' %}">aqui</a></h2>
+</body>
+</html>
