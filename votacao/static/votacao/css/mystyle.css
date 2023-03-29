@@ -1,0 +1,6 @@
+body {
+    background-image:url('../images/myimage.jpg');
+    background-size:cover;
+    color:darkslategrey;
+    font-family: Arial, sans serif;
+}

@@ -4,8 +4,10 @@ from django.template import loader
 from .models import Questao, Opcao, Aluno
 from django.urls import reverse
 from django.utils import timezone
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, Permission
 from django.contrib.auth.models import User
+from django.core.files.storage import FileSystemStorage
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -142,6 +144,16 @@ def deletar(request, type, id):
         questao = opcao.questao
         opcao.delete()
         return HttpResponseRedirect(reverse('votacao:detalhe', args=(questao.id,)))
+
+
+def fazer_upload(request):
+    if request.method == 'POST' and request.FILES.get('myfile') is not None:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url =fs.url(filename)
+        return render(request , 'votacao/fazer_upload.html', {'uploaded_file_url':uploaded_file_url})
+    return render(request ,'votacao/fazer_upload.html')
 
 
 
