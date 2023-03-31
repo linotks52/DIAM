@@ -1,15 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Criar Opcao</title>
-</head>
-<body>
+{% extends "./index.html" %}
+
+{% block titulo %}
+        Criar opção
+{% endblock %}
+
+{% block conteudo %}
     <h1> Criar nova questão:</h1>
-    <form action="{% url 'votacao:criarop' questao.id %}"  method="post">
-    {% csrf_token %}
-        <input type="text" name="opcao" placeholder="Opcao">
-        <input type="submit" value="criar" />
-    </form>
-</body>
-</html>
+    <div>
+        <form action="{% url 'votacao:criarop' questao.id %}"  method="post">
+        {% csrf_token %}
+            <input type="text" name="opcao" placeholder="Opcao">
+            <input type="submit" value="criar" />
+        </form>
+    </div>
+{% endblock %}
+{% block options %}
+    <p> <a href="{% url 'votacao:index' %}"> Voltar</a></p>
+{% endblock %}

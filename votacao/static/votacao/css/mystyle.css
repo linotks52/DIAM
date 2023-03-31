@@ -28,3 +28,7 @@ nav  a.active {
 header {
     padding: 25px;
 }
+
+div {
+    margin: auto;
+}

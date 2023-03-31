@@ -40,6 +40,8 @@
     {% else %}
         <p>Não há questões disponíveis.</p>
     {% endif %}
+    {% endblock %}
+    {% block options %}
         {% if request.user.is_authenticated %}
         <a href="{% url 'votacao:criarquestao' %}">
             {{ "Criar nova Questão" }}

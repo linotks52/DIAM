@@ -10,5 +10,7 @@
     <p> Meu email é {{ request.user.email }}</p>
     <p> Meu curso é {{ request.user.aluno.curso }}</p>
     <p></p>
+{% endblock %}
+{% block options %}
     <p> <a href="{% url 'votacao:index' %}"> Voltar</a></p>
 {% endblock %}

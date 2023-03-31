@@ -6,12 +6,14 @@
 
 {% block conteudo %}
 <h1> Registo</h1>
-    <form action="{% url 'votacao:signup'%}"  method="post">
-    {% csrf_token %}
-        <input type="text" name="username" placeholder="Username">
-        <input type="text" name="email" placeholder="Email">
-        <input type="text" name="curso" placeholder="Curso">
-        <input type="password" name="password" placeholder="Senha">
-        <input type="submit" value="criar" />
-    </form>
+    <div>
+        <form action="{% url 'votacao:signup'%}"  method="post">
+        {% csrf_token %}
+            <input type="text" name="username" placeholder="Username">
+            <input type="text" name="email" placeholder="Email">
+            <input type="text" name="curso" placeholder="Curso">
+            <input type="password" name="password" placeholder="Senha">
+            <input type="submit" value="criar" />
+        </form>
+    </div>
 {% endblock %}

@@ -31,6 +31,8 @@
          <input type="submit" value="Voto" />
       {% endif %}
       </form>
+{% endblock %}
+{% block options %}
       <p> <a href="{% url 'votacao:index' %}"> Voltar </a></p>
       <a href="{% url 'votacao:criaropcao' questao.id %}">
       {{ "Criar nova opção" }}
