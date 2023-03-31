@@ -5,9 +5,6 @@ from django.conf.urls.static import static
 
 # (. significa que importa views da mesma directoria)
 
-if settings.DEBUG:
-  urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
 app_name = 'votacao'
 urlpatterns = [
  # ex: votacao/
@@ -31,3 +28,5 @@ urlpatterns = [
  path("sair", views.sair, name='sair'),
  path('fazer_upload', views.fazer_upload , name='fazer_upload'),
 ]
+if settings.DEBUG:
+  urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

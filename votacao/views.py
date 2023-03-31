@@ -4,8 +4,8 @@ from django.template import loader
 from .models import Questao, Opcao, Aluno
 from django.urls import reverse
 from django.utils import timezone
-from django.contrib.auth import authenticate, login, logout, Permission
-from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User, Permission
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.decorators import login_required
 

@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Registo</title>
-</head>
-<body>
+{% extends "./index.html" %}
 
+{% block titulo %}
+    Registo
+{% endblock %}
+
+{% block conteudo %}
 <h1> Registo</h1>
     <form action="{% url 'votacao:signup'%}"  method="post">
     {% csrf_token %}
@@ -15,6 +14,4 @@
         <input type="password" name="password" placeholder="Senha">
         <input type="submit" value="criar" />
     </form>
-
-</body>
-</html>
+{% endblock %}
