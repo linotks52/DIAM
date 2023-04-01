@@ -38,3 +38,4 @@ class Aluno(models.Model):
  curso = models.CharField(max_length=50)
  votos = models.IntegerField(default=0)
  votosmax = models.IntegerField(default=0)
+ imagem = models.CharField(max_length=100, default="default-user-image.png")
