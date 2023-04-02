@@ -8,8 +8,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Permission
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import permission_required
 
 
+@login_required(login_url='/votacao/login')
 def index(request):
     latest_question_list = Questao.objects.order_by('-pub_data')[:5]
     context = {
@@ -17,11 +19,12 @@ def index(request):
     }
     return render(request, 'votacao/index.html', context)
 
-
+@login_required(login_url='/votacao/login')
 def detalhe(request, questao_id):
     questao = get_object_or_404(Questao, pk=questao_id)
     return render(request, 'votacao/detalhe.html', {'questao': questao})
 
+@login_required(login_url='/votacao/login')
 def voto(request, questao_id):
     questao = get_object_or_404(Questao, pk=questao_id)
 
@@ -58,14 +61,16 @@ def voto(request, questao_id):
 
 
 
+@login_required(login_url='/votacao/login')
 def resultados(request, questao_id):
     questao = get_object_or_404(Questao, pk=questao_id)
     return render(request, 'votacao/resultados.html', {'questao': questao})
 
-
+@permission_required('votacao.add_questao',login_url='/votacao/login')
 def criarquestao(request):
     return render(request, 'votacao/criarquestao.html')
 
+@permission_required('votacao.add_questao',login_url='/votacao/login')
 def criar(request):
     print("Lets go")
     texto = request.POST['questao']
@@ -79,10 +84,13 @@ def criar(request):
             'error_message': "Não inseriu texto",
         })
 
+
+@permission_required('votacao.add_opcao',login_url='/votacao/login')
 def criaropcao(request,questao_id):
     questao = get_object_or_404(Questao, pk=questao_id)
     return render(request, 'votacao/criaropcao.html',{'questao': questao})
 
+@permission_required('votacao.add_opcao',login_url='/votacao/login')
 def criarop(request,questao_id):
     q = get_object_or_404(Questao, pk=questao_id)
     texto = request.POST['opcao']
@@ -95,6 +103,8 @@ def criarop(request,questao_id):
             'error_message': "Não inseriu texto",
         })
 
+
+@login_required(login_url='/votacao/login')
 def signup(request):
     if(request.method == 'POST'):
         username = request.POST['username']
@@ -111,6 +121,7 @@ def signup(request):
     else:
         return render(request, 'votacao/signup.html')
 
+
 def logar(request):
     if(request.method == 'POST'):
         username = request.POST['username']
@@ -124,9 +135,13 @@ def logar(request):
     else:
         return render(request, 'votacao/login.html')
 
+
+@login_required(login_url='/votacao/login')
 def profile(request):
     return render(request, 'votacao/profile.html')
 
+
+@login_required(login_url='/votacao/login')
 def sair(request):
     request.session.flush
     logout(request)
@@ -134,6 +149,7 @@ def sair(request):
 #1 for question, 2 for option
 
 
+@permission_required('votacao.delete_opcao','votacao.delete_questao',login_url='/votacao/login')
 def deletar(request, type, id):
     if type==1:
         questao = get_object_or_404(Questao, pk=id)
@@ -146,6 +162,8 @@ def deletar(request, type, id):
         return HttpResponseRedirect(reverse('votacao:detalhe', args=(questao.id,)))
 
 
+
+@login_required(login_url='/votacao/login')
 def fazer_upload(request):
     if request.method == 'POST' and request.FILES.get('myfile') is not None:
         myfile = request.FILES['myfile']
