@@ -2,7 +2,7 @@ from django.urls import include, path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
-from django.contrib.auth import views as auth_views
+
 
 # (. significa que importa views da mesma directoria)
 
@@ -27,8 +27,8 @@ urlpatterns = [
  path("profile", views.profile, name='profile'),
  path("<int:type>/<int:id>/deletar", views.deletar, name='deletar'),
  path("sair", views.sair, name='sair'),
- path('fazer_upload', views.fazer_upload , name='fazer_upload'),
- path('/login', auth_views.LoginView.as_view())
+ path('fazer_upload', views.fazer_upload , name='fazer_upload')
+
 ]
 if settings.DEBUG:
   urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

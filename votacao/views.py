@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import permission_required
 
 
-@login_required(login_url='/votacao/login')
+@login_required(login_url='/votacao/')
 def index(request):
     latest_question_list = Questao.objects.order_by('-pub_data')[:5]
     context = {
@@ -19,12 +19,12 @@ def index(request):
     }
     return render(request, 'votacao/index.html', context)
 
-@login_required(login_url='/votacao/login')
+@login_required(login_url='/votacao/')
 def detalhe(request, questao_id):
     questao = get_object_or_404(Questao, pk=questao_id)
     return render(request, 'votacao/detalhe.html', {'questao': questao})
 
-@login_required(login_url='/votacao/login')
+@login_required(login_url='/votacao/')
 def voto(request, questao_id):
     questao = get_object_or_404(Questao, pk=questao_id)
 
@@ -61,16 +61,16 @@ def voto(request, questao_id):
 
 
 
-@login_required(login_url='/votacao/login')
+@login_required(login_url='/votacao/')
 def resultados(request, questao_id):
     questao = get_object_or_404(Questao, pk=questao_id)
     return render(request, 'votacao/resultados.html', {'questao': questao})
 
-@permission_required('votacao.add_questao',login_url='/votacao/login')
+@permission_required('votacao.add_questao',login_url='/votacao/')
 def criarquestao(request):
     return render(request, 'votacao/criarquestao.html')
 
-@permission_required('votacao.add_questao',login_url='/votacao/login')
+@permission_required('votacao.add_questao',login_url='/votacao/')
 def criar(request):
     print("Lets go")
     texto = request.POST['questao']
@@ -85,12 +85,12 @@ def criar(request):
         })
 
 
-@permission_required('votacao.add_opcao',login_url='/votacao/login')
+@permission_required('votacao.add_opcao',login_url='/votacao/')
 def criaropcao(request,questao_id):
     questao = get_object_or_404(Questao, pk=questao_id)
     return render(request, 'votacao/criaropcao.html',{'questao': questao})
 
-@permission_required('votacao.add_opcao',login_url='/votacao/login')
+@permission_required('votacao.add_opcao',login_url='/votacao/')
 def criarop(request,questao_id):
     q = get_object_or_404(Questao, pk=questao_id)
     texto = request.POST['opcao']
@@ -104,7 +104,6 @@ def criarop(request,questao_id):
         })
 
 
-@login_required(login_url='/votacao/login')
 def signup(request):
     if(request.method == 'POST'):
         username = request.POST['username']
@@ -136,12 +135,12 @@ def logar(request):
         return render(request, 'votacao/login.html')
 
 
-@login_required(login_url='/votacao/login')
+@login_required(login_url='/votacao/')
 def profile(request):
     return render(request, 'votacao/profile.html')
 
 
-@login_required(login_url='/votacao/login')
+@login_required(login_url='/votacao/')
 def sair(request):
     request.session.flush
     logout(request)
@@ -149,7 +148,8 @@ def sair(request):
 #1 for question, 2 for option
 
 
-@permission_required('votacao.delete_opcao','votacao.delete_questao',login_url='/votacao/login')
+@permission_required('votacao.delete_opcao',login_url='/votacao/')
+@permission_required('votacao.delete_questao',login_url='/votacao/')
 def deletar(request, type, id):
     if type==1:
         questao = get_object_or_404(Questao, pk=id)
@@ -163,7 +163,7 @@ def deletar(request, type, id):
 
 
 
-@login_required(login_url='/votacao/login')
+@login_required(login_url='/votacao/')
 def fazer_upload(request):
     if request.method == 'POST' and request.FILES.get('myfile') is not None:
         myfile = request.FILES['myfile']
