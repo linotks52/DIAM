@@ -8,7 +8,18 @@
 </head>
 <body>
     {% if request.user.is_authenticated %}
-        <header> Seja bem vindo {{ request.user.username }}, o teu total de votos é {{ request.user.aluno.votos }} </header>
+        <header> Seja bem vindo <a href="javascript:visibility()"> {{ request.user.username }} </a>, o teu total de votos é {{ request.user.aluno.votos }} </header>
+
+        <img id="pfp" onclick="visibility()"  src="{% static request.user.aluno.imagem %}" width="300" height="300">
+        <script type='text/javascript'>
+            function visibility(){
+                var image = document.getElementById("pfp");
+                if(image.style.display!="none")
+                    image.style.display="none";
+                else
+                    image.style.display="block";
+            }
+        </script>
         <nav>
             <a href="https://www.iscte-iul.pt/"><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Logo_ISCTE_Instituto_Universit%C3%A1rio_de_Lisboa.svg" alt="ISCTE" style="width:80px;height:15px;"></a>
             <a href="{% url 'votacao:profile' %}">O meu perfil</a>
