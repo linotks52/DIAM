@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <script>
+    function verify() {
+        const insultos = ["Tatibitate", "Abécula", "Abentesma", "Achavascado", "Alimária", "Andrajoso", "Barregã", "Biltre", "Cacóstomo", "Cuarra", "Estólido", "Estroso",
+            "Estultilóquio", "Nefelibata", "Néscio", "Pechenga", "Sevandija", "Somítico", "Xexé", "Cheché", "Xexelento"];
+        const accept = document.getElementById("done");
+        const comment = document.getElementById("comment").value;
+        const Array = comment.split(" ");
+
+        for (let x = 0; x < Array.length; x++) {
+            for (let y = 0; y < insultos.length; y++) {
+                if (Array[x] === insultos[y]) {
+                    document.getElementById("comment").value= "";
+                    return;
+                }
+            }
+        }
+        accept.style.display="";
+    }
 
     function changeStyle() {
         const btn = document.getElementById("btn");

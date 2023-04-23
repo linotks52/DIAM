@@ -110,6 +110,7 @@ def signup(request):
         password = request.POST['password']
         email = request.POST['email']
         curso = request.POST['curso']
+
         u = User.objects.create_user(username, email, password)
         a = Aluno(user=u, curso=curso)
         a.votosmax=int(curso[-2:]) + 10

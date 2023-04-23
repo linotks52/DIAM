@@ -1,8 +1,11 @@
 {% extends "./index.html" %}
 
+
 {% block titulo %}
     Registo
 {% endblock %}
+
+
 
 {% block conteudo %}
 <h1> Registo</h1>
@@ -15,5 +18,8 @@
             <input type="password" name="password" placeholder="Senha">
             <input type="submit" value="criar" />
         </form>
+        <input id="comment" type="text" name="comentario" placeholder="Comentario"><p id="done" style="display: none;">Comentario aceite</p>
+            <button id="btn" onclick="verify()" >Validar Comentario</button>
     </div>
 {% endblock %}
+
