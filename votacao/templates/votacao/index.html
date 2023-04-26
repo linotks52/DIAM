@@ -11,12 +11,15 @@
         for (let x = 0; x < Array.length; x++) {
             for (let y = 0; y < insultos.length; y++) {
                 if (Array[x] === insultos[y]) {
-                    document.getElementById("comment").value= "";
-                    return;
+                    document.getElementById("comment").value="";
                 }
             }
         }
-        accept.style.display="";
+        if(document.getElementById("comment").value.length===0) {
+            document.getElementById("done").style.display = "none";
+        }else{
+            document.getElementById("done").style.display = "";
+        }
     }
 
     function changeStyle() {
